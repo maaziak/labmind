@@ -136,7 +136,8 @@
                 output.style.display = 'block';
                 output.innerText = data.result;
             } catch (err) {
-                alert('Something went wrong. Check your API key and try again.');
+                const errorData = await res.json();
+                alert('Error: ' + (errorData.error || 'Unknown error'));
             } finally {
                 btn.disabled = false;
                 loader.style.display = 'none';
