@@ -58,7 +58,7 @@ Respond in this exact format:
         )
         
         data = response.json()
-        
+        print(data)
         if "choices" not in data:
             return jsonify({"error": str(data)}), 500
             
