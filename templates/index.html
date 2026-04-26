@@ -15,7 +15,6 @@
             min-height: 100vh;
         }
 
-        /* HEADER */
         header {
             display: flex;
             align-items: center;
@@ -42,10 +41,9 @@
             border-radius: 20px;
         }
 
-        /* HERO */
         .hero {
             text-align: center;
-            padding: 80px 20px 60px;
+            padding: 70px 20px 50px;
         }
 
         .hero-tag {
@@ -63,7 +61,7 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
@@ -78,17 +76,16 @@
 
         .hero p {
             color: #888;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             max-width: 500px;
-            margin: 0 auto 48px;
+            margin: 0 auto;
             line-height: 1.7;
         }
 
-        /* MAIN CARD */
         .main-card {
-            max-width: 800px;
+            max-width: 860px;
             margin: 0 auto;
-            padding: 0 20px 80px;
+            padding: 40px 20px 80px;
         }
 
         .input-area {
@@ -110,7 +107,7 @@
 
         textarea {
             width: 100%;
-            height: 130px;
+            height: 120px;
             background: #0d0d0d;
             border: 1px solid #2a2a2a;
             border-radius: 12px;
@@ -127,7 +124,6 @@
         textarea:focus { border-color: #ffd93d; }
         textarea::placeholder { color: #444; }
 
-        /* EXAMPLES */
         .examples-label {
             font-size: 0.8rem;
             color: #555;
@@ -161,7 +157,6 @@
             background: #1f1c00;
         }
 
-        /* GENERATE BUTTON */
         #generateBtn {
             width: 100%;
             margin-top: 20px;
@@ -181,7 +176,6 @@
         #generateBtn:hover { opacity: 0.92; transform: translateY(-1px); }
         #generateBtn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-        /* LOADER */
         #loader {
             display: none;
             text-align: center;
@@ -214,83 +208,263 @@
 
         #loader p { color: #555; font-size: 0.9rem; }
 
-        /* OUTPUT */
-        #output {
-            display: none;
-            margin-top: 30px;
-            background: #141414;
-            border: 1px solid #2a2a2a;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+        /* RESULTS */
+        #output { display: none; margin-top: 40px; }
 
-        .output-header {
+        .result-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 28px;
-            border-bottom: 1px solid #2a2a2a;
-            background: #1a1a1a;
+            margin-bottom: 24px;
         }
 
-        .output-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #6bcb77;
-        }
-
-        .output-badge {
-            background: #6bcb7722;
-            color: #6bcb77;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid #6bcb7744;
-        }
-
-        #output-content {
-            padding: 28px;
-            white-space: pre-wrap;
-            line-height: 1.9;
-            font-size: 0.95rem;
-            color: #ddd;
-        }
-
-        /* STATS BAR */
-        .stats {
-            display: flex;
-            gap: 0;
-            border-top: 1px solid #2a2a2a;
-        }
-
-        .stat {
-            flex: 1;
-            text-align: center;
-            padding: 16px;
-            border-right: 1px solid #2a2a2a;
-        }
-
-        .stat:last-child { border-right: none; }
-
-        .stat-value {
-            font-size: 1.3rem;
+        .result-title {
+            font-size: 1.2rem;
             font-weight: 800;
-            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            color: #fff;
+        }
+
+        .result-title span {
+            color: #6bcb77;
+        }
+
+        /* TAB BUTTONS */
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #2a2a2a;
+            background: #141414;
+            color: #888;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover { border-color: #444; color: #fff; }
+
+        .tab-btn.active {
+            color: #0d0d0d;
+            font-weight: 800;
+            border-color: transparent;
+        }
+
+        .tab-btn .tab-icon { font-size: 1rem; }
+
+        /* TAB PANELS */
+        .tab-panel {
+            display: none;
+            background: #141414;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid #2a2a2a;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-panel.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        /* STEP CARD */
+        .step-card {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            background: #0d0d0d;
+            border-radius: 14px;
+            padding: 16px 20px;
+            border: 1px solid #1f1f1f;
+            transition: border 0.2s;
+        }
+
+        .step-card:hover { border-color: #9b59b644; }
+
+        .step-number {
+            background: linear-gradient(135deg, #9b59b6, #c39bd3);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.85rem;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-text { color: #ccc; line-height: 1.7; font-size: 0.93rem; }
+        .step-text strong { color: #fff; }
+
+        /* BULLET CARD */
+        .bullet-card {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px 16px;
+            background: #0d0d0d;
+            border-radius: 12px;
+            border: 1px solid #1f1f1f;
+        }
+
+        .bullet-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        .bullet-text { color: #ccc; line-height: 1.7; font-size: 0.93rem; }
+        .bullet-text strong { color: #fff; }
+
+        /* TABLE */
+        .fancy-table { width: 100%; border-collapse: collapse; }
+
+        .fancy-table th {
+            background: #0d0d0d;
+            color: #888;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .fancy-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #1a1a1a;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .fancy-table tr:hover td { background: #ffffff05; }
+        .fancy-table td:first-child { color: #fff; font-weight: 600; }
+
+        /* TIMELINE */
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .timeline-week {
+            min-width: 80px;
+            background: linear-gradient(135deg, #1a4a2a, #6bcb7722);
+            border: 1px solid #6bcb7744;
+            color: #6bcb77;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 8px 12px;
+            border-radius: 10px;
+            text-align: center;
+            height: fit-content;
+        }
+
+        .timeline-content {
+            background: #0d0d0d;
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 1px solid #1f1f1f;
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        /* WARNING */
+        .warning-card {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 14px;
+            background: #2e1a0a;
+            border: 1px solid #ff6b6b33;
+            border-left: 4px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 16px 20px;
+        }
+
+        .warning-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+        .warning-text { color: #f1948a; line-height: 1.7; font-size: 0.93rem; }
+        .warning-text strong { color: #ff6b6b; }
+
+        /* SUMMARY */
+        .summary-box {
+            background: linear-gradient(135deg, #2e2a0a, #1a1800);
+            border: 1px solid #ffd93d33;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .summary-box p {
+            color: #f9e79f;
+            line-height: 1.9;
+            font-size: 1rem;
+        }
+
+        .summary-stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .summary-stat {
+            background: #ffffff08;
+            border: 1px solid #ffd93d22;
+            border-radius: 12px;
+            padding: 14px 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .summary-stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffd93d, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .stat-label {
+        .summary-stat-label {
             font-size: 0.72rem;
-            color: #555;
+            color: #666;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 4px;
         }
 
-        /* FOOTER */
+        .plain-text { color: #bbb; line-height: 1.8; font-size: 0.93rem; }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -310,7 +484,7 @@
     <div class="hero">
         <div class="hero-tag">🔬 AI Lab Assistant</div>
         <h1>From Hypothesis to<br><span>Full Experiment Plan</span></h1>
-        <p>Type your scientific hypothesis and get a complete, lab-ready experiment plan in seconds — protocols, reagents, budgets and timelines included.</p>
+        <p>Type your scientific hypothesis and get a complete, lab-ready experiment plan in seconds.</p>
     </div>
 
     <div class="main-card">
@@ -339,115 +513,239 @@
         </div>
 
         <div id="output">
-            <div class="output-header">
-                <div class="output-title">✅ Experiment Plan Ready</div>
-                <div class="output-badge">Lab Ready</div>
+            <div class="result-header">
+                <div class="result-title">✅ Experiment Plan <span>Ready</span></div>
             </div>
-            <div id="output-content"></div>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-value" id="stat-sections">5</div>
-                    <div class="stat-label">Sections</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value" id="stat-words">—</div>
-                    <div class="stat-label">Words</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">AI</div>
-                    <div class="stat-label">Powered</div>
-                </div>
+
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('protocol', this)" style="background:linear-gradient(135deg,#9b59b6,#c39bd3);color:#fff;border-color:transparent;">
+                    <span class="tab-icon">🔬</span> Protocol
+                </button>
+                <button class="tab-btn" onclick="switchTab('reagents', this)">
+                    <span class="tab-icon">🧪</span> Reagents
+                </button>
+                <button class="tab-btn" onclick="switchTab('timeline', this)">
+                    <span class="tab-icon">📅</span> Timeline
+                </button>
+                <button class="tab-btn" onclick="switchTab('safety', this)">
+                    <span class="tab-icon">⚠️</span> Safety
+                </button>
+                <button class="tab-btn" onclick="switchTab('summary', this)">
+                    <span class="tab-icon">📋</span> PI Summary
+                </button>
+            </div>
+
+            <div id="panel-protocol" class="tab-panel active">
+                <div class="panel-title" style="color:#c39bd3;">🔬 Protocol Steps</div>
+                <div id="content-protocol"></div>
+            </div>
+
+            <div id="panel-reagents" class="tab-panel">
+                <div class="panel-title" style="color:#7fb3f5;">🧪 Reagents & Estimated Costs</div>
+                <div id="content-reagents"></div>
+            </div>
+
+            <div id="panel-timeline" class="tab-panel">
+                <div class="panel-title" style="color:#6bcb77;">📅 Week-by-Week Timeline</div>
+                <div id="content-timeline"></div>
+            </div>
+
+            <div id="panel-safety" class="tab-panel">
+                <div class="panel-title" style="color:#f1948a;">⚠️ Safety Warnings</div>
+                <div id="content-safety"></div>
+            </div>
+
+            <div id="panel-summary" class="tab-panel">
+                <div class="panel-title" style="color:#f9e79f;">📋 PI Summary</div>
+                <div id="content-summary"></div>
             </div>
         </div>
     </div>
 
-    <footer>
-        Built with ❤️ at the Hackathon · SciNova Lab © 2026
-    </footer>
+    <footer>Built with ❤️ at the Hackathon · SciNova Lab © 2026</footer>
 
     <script>
+        const tabColors = {
+            protocol: 'linear-gradient(135deg,#9b59b6,#c39bd3)',
+            reagents: 'linear-gradient(135deg,#1a6bc4,#4d96ff)',
+            timeline: 'linear-gradient(135deg,#1a7a3a,#6bcb77)',
+            safety:   'linear-gradient(135deg,#c0392b,#ff6b6b)',
+            summary:  'linear-gradient(135deg,#b7950b,#ffd93d)'
+        };
+
+        function switchTab(name, btn) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active');
+                b.style.background = '#141414';
+                b.style.color = '#888';
+                b.style.borderColor = '#2a2a2a';
+            });
+            document.getElementById('panel-' + name).classList.add('active');
+            btn.classList.add('active');
+            btn.style.background = tabColors[name];
+            btn.style.color = '#fff';
+            btn.style.borderColor = 'transparent';
+        }
+
         function fillExample(btn) {
             document.getElementById('hypothesis').value = btn.innerText;
         }
-        function formatOutput(text) {
-    const sectionColors = {
-        'Protocol Steps': { bg: '#1a0a2e', border: '#9b59b6', icon: '🔬', color: '#c39bd3' },
-        'Reagents & Estimated Costs': { bg: '#0a1a2e', border: '#4d96ff', icon: '🧪', color: '#7fb3f5' },
-        'Week-by-Week Timeline': { bg: '#0a2e1a', border: '#6bcb77', icon: '📅', color: '#a9dfb0' },
-        'Safety Warnings': { bg: '#2e1a0a', border: '#ff6b6b', icon: '⚠️', color: '#f1948a' },
-        'PI Summary': { bg: '#2e2a0a', border: '#ffd93d', icon: '📋', color: '#f9e79f' }
-    };
 
-    const sections = text.split(/##\s+/);
-    let html = '';
+        function parseAndRender(rawText) {
+            const sections = {
+                protocol: '',
+                reagents: '',
+                timeline: '',
+                safety: '',
+                summary: ''
+            };
 
-    sections.forEach(section => {
-        if (!section.trim()) return;
+            const sectionMap = [
+                { key: 'protocol', markers: ['Protocol Steps'] },
+                { key: 'reagents', markers: ['Reagents', 'Estimated Costs'] },
+                { key: 'timeline', markers: ['Timeline', 'Week-by-Week'] },
+                { key: 'safety',   markers: ['Safety'] },
+                { key: 'summary',  markers: ['PI Summary', 'Summary'] }
+            ];
 
-        let matchedKey = null;
-        let style = null;
-
-        for (const key of Object.keys(sectionColors)) {
-            if (section.includes(key)) {
-                matchedKey = key;
-                style = sectionColors[key];
-                break;
-            }
-        }
-
-        if (!style) return;
-
-        const lines = section.split('\n').filter(l => l.trim());
-        const title = lines[0].replace(/[🔬🧪📅⚠️📋]/g, '').trim();
-        const content = lines.slice(1).join('\n').trim();
-
-        const formattedContent = content
-            .split('\n')
-            .map(line => {
-                line = line.trim();
-                if (!line) return '';
-                if (line.match(/^\d+\./)) {
-                    return `<div style="display:flex;gap:12px;margin-bottom:10px;">
-                        <span style="background:${style.border};color:#0d0d0d;font-weight:800;font-size:0.75rem;padding:2px 8px;border-radius:20px;min-width:24px;text-align:center;">${line.match(/^\d+/)[0]}</span>
-                        <span style="color:#ddd;line-height:1.6;">${line.replace(/^\d+\.\s*/, '')}</span>
-                    </div>`;
-                }
-                if (line.startsWith('-') || line.startsWith('•')) {
-                    return `<div style="display:flex;gap:10px;margin-bottom:8px;">
-                        <span style="color:${style.border};margin-top:2px;">▸</span>
-                        <span style="color:#ddd;line-height:1.6;">${line.replace(/^[-•]\s*/, '')}</span>
-                    </div>`;
-                }
-                if (line.includes('|')) {
-                    const cells = line.split('|').filter(c => c.trim());
-                    if (cells.length > 1) {
-                        return `<div style="display:flex;gap:0;margin-bottom:4px;border-bottom:1px solid #2a2a2a;padding-bottom:4px;">
-                            ${cells.map((c, i) => `<span style="flex:1;color:${i===0?style.color:'#ddd'};font-weight:${i===0?'600':'400'};font-size:0.88rem;padding:4px 8px;">${c.trim()}</span>`).join('')}
-                        </div>`;
+            const parts = rawText.split(/##\s+/);
+            parts.forEach(part => {
+                const firstLine = part.split('\n')[0];
+                const content = part.split('\n').slice(1).join('\n').trim();
+                for (const s of sectionMap) {
+                    if (s.markers.some(m => firstLine.includes(m))) {
+                        sections[s.key] = content;
+                        break;
                     }
                 }
-                if (line.toLowerCase().includes('week') || line.toLowerCase().includes('day')) {
-                    return `<div style="background:#ffffff08;border-left:3px solid ${style.border};padding:10px 14px;margin-bottom:8px;border-radius:0 8px 8px 0;">
-                        <span style="color:${style.color};font-weight:600;font-size:0.9rem;">${line}</span>
+            });
+
+            // PROTOCOL
+            document.getElementById('content-protocol').innerHTML = renderProtocol(sections.protocol);
+            // REAGENTS
+            document.getElementById('content-reagents').innerHTML = renderReagents(sections.reagents);
+            // TIMELINE
+            document.getElementById('content-timeline').innerHTML = renderTimeline(sections.timeline);
+            // SAFETY
+            document.getElementById('content-safety').innerHTML = renderSafety(sections.safety);
+            // SUMMARY
+            document.getElementById('content-summary').innerHTML = renderSummary(sections.summary);
+        }
+
+        function cleanLine(line) {
+            return line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').trim();
+        }
+
+        function renderProtocol(text) {
+            const lines = text.split('\n').filter(l => l.trim());
+            let html = '';
+            let stepNum = 0;
+            lines.forEach(line => {
+                line = line.trim();
+                if (line.match(/^\d+\./)) {
+                    stepNum++;
+                    html += `<div class="step-card">
+                        <div class="step-number">${stepNum}</div>
+                        <div class="step-text">${cleanLine(line.replace(/^\d+\.\s*/, ''))}</div>
                     </div>`;
+                } else if (line.startsWith('*') || line.startsWith('-')) {
+                    html += `<div class="bullet-card">
+                        <div class="bullet-dot" style="background:#c39bd3;"></div>
+                        <div class="bullet-text">${cleanLine(line.replace(/^[*\-•]\s*/, ''))}</div>
+                    </div>`;
+                } else if (line) {
+                    html += `<p class="plain-text" style="margin-bottom:10px;">${cleanLine(line)}</p>`;
                 }
-                return `<p style="color:#bbb;line-height:1.7;margin-bottom:8px;font-size:0.93rem;">${line}</p>`;
-            })
-            .join('');
+            });
+            return html || '<p class="plain-text">No protocol data found.</p>';
+        }
 
-        html += `
-            <div style="background:${style.bg};border:1px solid ${style.border}33;border-left:4px solid ${style.border};border-radius:16px;padding:24px;margin-bottom:20px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid ${style.border}22;">
-                    <span style="font-size:1.4rem;">${style.icon}</span>
-                    <span style="font-size:1rem;font-weight:800;color:${style.color};text-transform:uppercase;letter-spacing:1px;">${title}</span>
-                </div>
-                <div>${formattedContent}</div>
+        function renderReagents(text) {
+            const lines = text.split('\n').filter(l => l.trim());
+            const tableLines = lines.filter(l => l.includes('|'));
+            if (tableLines.length > 0) {
+                let html = '<table class="fancy-table"><thead><tr>';
+                const headers = tableLines[0].split('|').filter(c => c.trim());
+                headers.forEach(h => { html += `<th>${h.trim()}</th>`; });
+                html += '</tr></thead><tbody>';
+                tableLines.slice(2).forEach(row => {
+                    const cells = row.split('|').filter(c => c.trim());
+                    if (cells.length > 1) {
+                        html += '<tr>';
+                        cells.forEach(c => { html += `<td>${cleanLine(c.trim())}</td>`; });
+                        html += '</tr>';
+                    }
+                });
+                html += '</tbody></table>';
+                return html;
+            }
+            return renderProtocol(text);
+        }
+
+        function renderTimeline(text) {
+            const lines = text.split('\n').filter(l => l.trim());
+            const tableLines = lines.filter(l => l.includes('|'));
+            if (tableLines.length > 0) {
+                let html = '';
+                tableLines.slice(2).forEach(row => {
+                    const cells = row.split('|').filter(c => c.trim());
+                    if (cells.length >= 2) {
+                        html += `<div class="timeline-item">
+                            <div class="timeline-week">${cells[0].trim()}</div>
+                            <div class="timeline-content">${cleanLine(cells[1].trim())}</div>
+                        </div>`;
+                    }
+                });
+                return html || '<p class="plain-text">No timeline data found.</p>';
+            }
+            const weekLines = lines.filter(l => l.toLowerCase().includes('week') || l.match(/^\d+[\.\-]/));
+            if (weekLines.length > 0) {
+                return weekLines.map(l => `<div class="timeline-item">
+                    <div class="timeline-week">📅</div>
+                    <div class="timeline-content">${cleanLine(l)}</div>
+                </div>`).join('');
+            }
+            return renderProtocol(text);
+        }
+
+        function renderSafety(text) {
+            const lines = text.split('\n').filter(l => l.trim());
+            let html = '';
+            lines.forEach(line => {
+                line = line.trim();
+                if (line.startsWith('*') || line.startsWith('-') || line.match(/^\d+\./)) {
+                    html += `<div class="warning-card">
+                        <div class="warning-icon">⚠️</div>
+                        <div class="warning-text">${cleanLine(line.replace(/^[*\-•\d+\.]\s*/, ''))}</div>
+                    </div>`;
+                } else if (line) {
+                    html += `<p class="plain-text" style="margin-bottom:10px;">${cleanLine(line)}</p>`;
+                }
+            });
+            return html || '<p class="plain-text">No safety data found.</p>';
+        }
+
+        function renderSummary(text) {
+            return `<div class="summary-box">
+                <p>${cleanLine(text.replace(/\n/g, '<br><br>'))}</p>
             </div>
-        `;
-    });
+            <div class="summary-stats">
+                <div class="summary-stat">
+                    <div class="summary-stat-value">5</div>
+                    <div class="summary-stat-label">Sections</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value">AI</div>
+                    <div class="summary-stat-label">Powered</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value">⚗️</div>
+                    <div class="summary-stat-label">Lab Ready</div>
+                </div>
+            </div>`;
+        }
 
-    return html || `<p style="color:#888;">${text}</p>`;
-}
         async function generate() {
             const hypothesis = document.getElementById('hypothesis').value.trim();
             if (!hypothesis) return alert('Please enter a hypothesis first!');
@@ -473,10 +771,19 @@
                     return;
                 }
 
-                document.getElementById('output-content').innerHTML = formatOutput(data.result);
-                const wordCount = data.result.split(' ').length;
-                document.getElementById('stat-words').innerText = wordCount;
+                parseAndRender(data.result);
                 output.style.display = 'block';
+
+                // reset to first tab
+                document.querySelectorAll('.tab-btn').forEach((b, i) => {
+                    b.style.background = '#141414';
+                    b.style.color = '#888';
+                    b.style.borderColor = '#2a2a2a';
+                    b.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.tab-btn')[0].click();
+
                 output.scrollIntoView({ behavior: 'smooth' });
 
             } catch (err) {
@@ -487,6 +794,5 @@
             }
         }
     </script>
-
 </body>
 </html>
