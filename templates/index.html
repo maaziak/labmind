@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabMind AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0f1e;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+        .examples {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .example-btn {
+            background: #1a2035;
+            border: 1px solid #00ff8844;
+            color: #00ff88;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .example-btn:hover { background: #00ff8822; }
+        textarea {
+            width: 100%;
+            height: 120px;
+            background: #1a2035;
+            border: 1px solid #2a3555;
+            border-radius: 12px;
+            color: #e0e0e0;
+            padding: 16px;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            transition: border 0.2s;
+        }
+        textarea:focus { border-color: #00ff88; }
+        button#generateBtn {
+            width: 100%;
+            margin-top: 16px;
+            padding: 16px;
+            background: #00ff88;
+            color: #0a0f1e;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button#generateBtn:hover { opacity: 0.9; }
+        button#generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+        #output {
+            margin-top: 40px;
+            background: #1a2035;
+            border-radius: 12px;
+            padding: 30px;
+            display: none;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        #loader {
+            text-align: center;
+            margin-top: 30px;
+            color: #00ff88;
+            display: none;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧬 LabMind AI</h1>
+        <p class="subtitle">From hypothesis to full experiment plan in seconds</p>
+
+        <div class="examples">
+            <button class="example-btn" onclick="fillExample(this)">Green tea extract vs tumor growth</button>
+            <button class="example-btn" onclick="fillExample(this)">Caffeine effect on memory in mice</button>
+            <button class="example-btn" onclick="fillExample(this)">Vitamin D deficiency and depression</button>
+        </div>
+
+        <textarea id="hypothesis" placeholder="Enter your scientific hypothesis here..."></textarea>
+        <button id="generateBtn" onclick="generate()">⚗️ Generate Experiment Plan</button>
+
+        <div id="loader">⏳ Generating your experiment plan... this takes ~10 seconds</div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function fillExample(btn) {
+            document.getElementById('hypothesis').value = btn.innerText;
+        }
+
+        async function generate() {
+            const hypothesis = document.getElementById('hypothesis').value.trim();
+            if (!hypothesis) return alert('Please enter a hypothesis first!');
+
+            const btn = document.getElementById('generateBtn');
+            const loader = document.getElementById('loader');
+            const output = document.getElementById('output');
+
+            btn.disabled = true;
+            loader.style.display = 'block';
+            output.style.display = 'none';
+
+            try {
+                const res = await fetch('/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ hypothesis })
+                });
+                const data = await res.json();
+                output.style.display = 'block';
+                output.innerText = data.result;
+            } catch (err) {
+                alert('Something went wrong. Check your API key and try again.');
+            } finally {
+                btn.disabled = false;
+                loader.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
