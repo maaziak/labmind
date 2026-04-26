@@ -3,111 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabMind AI</title>
+    <title>SciNova Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #0a0f1e;
-            color: #e0e0e0;
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0d0d0d;
+            color: #ffffff;
             min-height: 100vh;
-            padding: 40px 20px;
         }
-        .container { max-width: 900px; margin: 0 auto; }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 48px;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: #0d0d0d;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #ffd93d;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #00ff88;
-            margin-bottom: 8px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
         }
-        .subtitle {
-            text-align: center;
+
+        h1 span {
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
             color: #888;
-            margin-bottom: 40px;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
         }
+
+        /* MAIN CARD */
+        .main-card {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .input-area {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            color: #ffffff;
+            padding: 16px;
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            resize: none;
+            outline: none;
+            transition: border 0.2s;
+            line-height: 1.6;
+        }
+
+        textarea:focus { border-color: #ffd93d; }
+        textarea::placeholder { color: #444; }
+
+        /* EXAMPLES */
+        .examples-label {
+            font-size: 0.8rem;
+            color: #555;
+            margin: 16px 0 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .examples {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 20px;
         }
+
         .example-btn {
-            background: #1a2035;
-            border: 1px solid #00ff8844;
-            color: #00ff88;
-            padding: 8px 14px;
-            border-radius: 20px;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #ccc;
+            padding: 8px 16px;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
+            font-family: 'Space Grotesk', sans-serif;
             transition: all 0.2s;
         }
-        .example-btn:hover { background: #00ff8822; }
-        textarea {
-            width: 100%;
-            height: 120px;
-            background: #1a2035;
-            border: 1px solid #2a3555;
-            border-radius: 12px;
-            color: #e0e0e0;
-            padding: 16px;
-            font-size: 1rem;
-            resize: vertical;
-            outline: none;
-            transition: border 0.2s;
+
+        .example-btn:hover {
+            border-color: #ffd93d;
+            color: #ffd93d;
+            background: #1f1c00;
         }
-        textarea:focus { border-color: #00ff88; }
-        button#generateBtn {
+
+        /* GENERATE BUTTON */
+        #generateBtn {
             width: 100%;
-            margin-top: 16px;
-            padding: 16px;
-            background: #00ff88;
-            color: #0a0f1e;
+            margin-top: 20px;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: #0d0d0d;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.1s;
+            letter-spacing: 0.5px;
         }
-        button#generateBtn:hover { opacity: 0.9; }
-        button#generateBtn:disabled { opacity: 0.5; cursor: not-allowed; }
-        #output {
-            margin-top: 40px;
-            background: #1a2035;
-            border-radius: 12px;
-            padding: 30px;
-            display: none;
-            white-space: pre-wrap;
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
+
+        #generateBtn:hover { opacity: 0.92; transform: translateY(-1px); }
+        #generateBtn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+        /* LOADER */
         #loader {
-            text-align: center;
-            margin-top: 30px;
-            color: #00ff88;
             display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .loader-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: bounce 1.2s infinite;
+        }
+
+        .dot:nth-child(1) { background: #ff6b6b; animation-delay: 0s; }
+        .dot:nth-child(2) { background: #ffd93d; animation-delay: 0.2s; }
+        .dot:nth-child(3) { background: #6bcb77; animation-delay: 0.4s; }
+        .dot:nth-child(4) { background: #4d96ff; animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        #loader p { color: #555; font-size: 0.9rem; }
+
+        /* OUTPUT */
+        #output {
+            display: none;
+            margin-top: 30px;
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .output-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 28px;
+            border-bottom: 1px solid #2a2a2a;
+            background: #1a1a1a;
+        }
+
+        .output-title {
             font-size: 1rem;
+            font-weight: 700;
+            color: #6bcb77;
+        }
+
+        .output-badge {
+            background: #6bcb7722;
+            color: #6bcb77;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #6bcb7744;
+        }
+
+        #output-content {
+            padding: 28px;
+            white-space: pre-wrap;
+            line-height: 1.9;
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        /* STATS BAR */
+        .stats {
+            display: flex;
+            gap: 0;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            border-right: 1px solid #2a2a2a;
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #333;
+            font-size: 0.8rem;
+            border-top: 1px solid #1a1a1a;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🧬 LabMind AI</h1>
-        <p class="subtitle">From hypothesis to full experiment plan in seconds</p>
 
-        <div class="examples">
-            <button class="example-btn" onclick="fillExample(this)">Green tea extract vs tumor growth</button>
-            <button class="example-btn" onclick="fillExample(this)">Caffeine effect on memory in mice</button>
-            <button class="example-btn" onclick="fillExample(this)">Vitamin D deficiency and depression</button>
+    <header>
+        <div class="logo">⚗️ SciNova Lab</div>
+        <div class="badge">AI Powered ✨</div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-tag">🔬 AI Lab Assistant</div>
+        <h1>From Hypothesis to<br><span>Full Experiment Plan</span></h1>
+        <p>Type your scientific hypothesis and get a complete, lab-ready experiment plan in seconds — protocols, reagents, budgets and timelines included.</p>
+    </div>
+
+    <div class="main-card">
+        <div class="input-area">
+            <div class="input-label">Your Hypothesis</div>
+            <textarea id="hypothesis" placeholder="e.g. I want to test whether green tea extract slows tumor growth in mice..."></textarea>
+            <div class="examples-label">⚡ Try an example</div>
+            <div class="examples">
+                <button class="example-btn" onclick="fillExample(this)">Green tea extract vs tumor growth</button>
+                <button class="example-btn" onclick="fillExample(this)">Caffeine effect on memory in mice</button>
+                <button class="example-btn" onclick="fillExample(this)">Vitamin D deficiency and depression</button>
+                <button class="example-btn" onclick="fillExample(this)">Intermittent fasting & inflammation</button>
+            </div>
         </div>
 
-        <textarea id="hypothesis" placeholder="Enter your scientific hypothesis here..."></textarea>
-        <button id="generateBtn" onclick="generate()">⚗️ Generate Experiment Plan</button>
+        <button id="generateBtn" onclick="generate()">⚗️ Generate Experiment Plan →</button>
 
-        <div id="loader">⏳ Generating your experiment plan... this takes ~10 seconds</div>
-        <div id="output"></div>
+        <div id="loader">
+            <div class="loader-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <p>SciNova is building your experiment plan...</p>
+        </div>
+
+        <div id="output">
+            <div class="output-header">
+                <div class="output-title">✅ Experiment Plan Ready</div>
+                <div class="output-badge">Lab Ready</div>
+            </div>
+            <div id="output-content"></div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="stat-sections">5</div>
+                    <div class="stat-label">Sections</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat-words">—</div>
+                    <div class="stat-label">Words</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">AI</div>
+                    <div class="stat-label">Powered</div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        Built with ❤️ at the Hackathon · SciNova Lab © 2026
+    </footer>
 
     <script>
         function fillExample(btn) {
@@ -133,16 +389,26 @@
                     body: JSON.stringify({ hypothesis })
                 });
                 const data = await res.json();
+
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+
+                document.getElementById('output-content').innerText = data.result;
+                const wordCount = data.result.split(' ').length;
+                document.getElementById('stat-words').innerText = wordCount;
                 output.style.display = 'block';
-                output.innerText = data.result;
+                output.scrollIntoView({ behavior: 'smooth' });
+
             } catch (err) {
-                const errorData = await res.json();
-                alert('Error: ' + (errorData.error || 'Unknown error'));
+                alert('Something went wrong: ' + err.message);
             } finally {
                 btn.disabled = false;
                 loader.style.display = 'none';
             }
         }
     </script>
+
 </body>
 </html>
