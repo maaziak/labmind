@@ -369,7 +369,85 @@
         function fillExample(btn) {
             document.getElementById('hypothesis').value = btn.innerText;
         }
+        function formatOutput(text) {
+    const sectionColors = {
+        'Protocol Steps': { bg: '#1a0a2e', border: '#9b59b6', icon: '🔬', color: '#c39bd3' },
+        'Reagents & Estimated Costs': { bg: '#0a1a2e', border: '#4d96ff', icon: '🧪', color: '#7fb3f5' },
+        'Week-by-Week Timeline': { bg: '#0a2e1a', border: '#6bcb77', icon: '📅', color: '#a9dfb0' },
+        'Safety Warnings': { bg: '#2e1a0a', border: '#ff6b6b', icon: '⚠️', color: '#f1948a' },
+        'PI Summary': { bg: '#2e2a0a', border: '#ffd93d', icon: '📋', color: '#f9e79f' }
+    };
 
+    const sections = text.split(/##\s+/);
+    let html = '';
+
+    sections.forEach(section => {
+        if (!section.trim()) return;
+
+        let matchedKey = null;
+        let style = null;
+
+        for (const key of Object.keys(sectionColors)) {
+            if (section.includes(key)) {
+                matchedKey = key;
+                style = sectionColors[key];
+                break;
+            }
+        }
+
+        if (!style) return;
+
+        const lines = section.split('\n').filter(l => l.trim());
+        const title = lines[0].replace(/[🔬🧪📅⚠️📋]/g, '').trim();
+        const content = lines.slice(1).join('\n').trim();
+
+        const formattedContent = content
+            .split('\n')
+            .map(line => {
+                line = line.trim();
+                if (!line) return '';
+                if (line.match(/^\d+\./)) {
+                    return `<div style="display:flex;gap:12px;margin-bottom:10px;">
+                        <span style="background:${style.border};color:#0d0d0d;font-weight:800;font-size:0.75rem;padding:2px 8px;border-radius:20px;min-width:24px;text-align:center;">${line.match(/^\d+/)[0]}</span>
+                        <span style="color:#ddd;line-height:1.6;">${line.replace(/^\d+\.\s*/, '')}</span>
+                    </div>`;
+                }
+                if (line.startsWith('-') || line.startsWith('•')) {
+                    return `<div style="display:flex;gap:10px;margin-bottom:8px;">
+                        <span style="color:${style.border};margin-top:2px;">▸</span>
+                        <span style="color:#ddd;line-height:1.6;">${line.replace(/^[-•]\s*/, '')}</span>
+                    </div>`;
+                }
+                if (line.includes('|')) {
+                    const cells = line.split('|').filter(c => c.trim());
+                    if (cells.length > 1) {
+                        return `<div style="display:flex;gap:0;margin-bottom:4px;border-bottom:1px solid #2a2a2a;padding-bottom:4px;">
+                            ${cells.map((c, i) => `<span style="flex:1;color:${i===0?style.color:'#ddd'};font-weight:${i===0?'600':'400'};font-size:0.88rem;padding:4px 8px;">${c.trim()}</span>`).join('')}
+                        </div>`;
+                    }
+                }
+                if (line.toLowerCase().includes('week') || line.toLowerCase().includes('day')) {
+                    return `<div style="background:#ffffff08;border-left:3px solid ${style.border};padding:10px 14px;margin-bottom:8px;border-radius:0 8px 8px 0;">
+                        <span style="color:${style.color};font-weight:600;font-size:0.9rem;">${line}</span>
+                    </div>`;
+                }
+                return `<p style="color:#bbb;line-height:1.7;margin-bottom:8px;font-size:0.93rem;">${line}</p>`;
+            })
+            .join('');
+
+        html += `
+            <div style="background:${style.bg};border:1px solid ${style.border}33;border-left:4px solid ${style.border};border-radius:16px;padding:24px;margin-bottom:20px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid ${style.border}22;">
+                    <span style="font-size:1.4rem;">${style.icon}</span>
+                    <span style="font-size:1rem;font-weight:800;color:${style.color};text-transform:uppercase;letter-spacing:1px;">${title}</span>
+                </div>
+                <div>${formattedContent}</div>
+            </div>
+        `;
+    });
+
+    return html || `<p style="color:#888;">${text}</p>`;
+}
         async function generate() {
             const hypothesis = document.getElementById('hypothesis').value.trim();
             if (!hypothesis) return alert('Please enter a hypothesis first!');
@@ -395,7 +473,7 @@
                     return;
                 }
 
-                document.getElementById('output-content').innerText = data.result;
+                document.getElementById('output-content').innerHTML = formatOutput(data.result);
                 const wordCount = data.result.split(' ').length;
                 document.getElementById('stat-words').innerText = wordCount;
                 output.style.display = 'block';
